@@ -75,8 +75,54 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.25</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.digitalpetri.modbus/modbus-codec -->
+        <dependency>
+            <groupId>com.digitalpetri.modbus</groupId>
+            <artifactId>modbus-codec</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.serotonin.modbus4j</groupId>
+            <artifactId>com.serotonin.modbus4j</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <systemPath>${project.basedir}/src/main/resources/lib/modbus4J.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>seroUtils</groupId>
+            <artifactId>serotonin.serotonin</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <systemPath>${project.basedir}/src/main/resources/lib/seroUtils.jar</systemPath>
+        </dependency>
 
     </dependencies>
+<!--    <repositories>-->
+<!--        <repository>-->
+<!--            <releases>-->
+<!--                <enabled>false</enabled>-->
+<!--            </releases>-->
+<!--            <snapshots>-->
+<!--                <enabled>true</enabled>-->
+<!--            </snapshots>-->
+<!--            <id>ias-snapshots</id>-->
+<!--            <name>Infinite Automation Snapshot Repository</name>-->
+<!--            <url>https://maven.mangoautomation.net/repository/ias-snapshot/</url>-->
+<!--        </repository>-->
+<!--        <repository>-->
+<!--            <releases>-->
+<!--                <enabled>true</enabled>-->
+<!--            </releases>-->
+<!--            <snapshots>-->
+<!--                <enabled>false</enabled>-->
+<!--            </snapshots>-->
+<!--            <id>ias-releases</id>-->
+<!--            <name>Infinite Automation Release Repository</name>-->
+<!--            <url>https://maven.mangoautomation.net/repository/ias-release/</url>-->
+<!--        </repository>-->
+<!--    </repositories>-->
 
     <build>
         <plugins>
@@ -95,7 +141,11 @@
             <resource>
                 <directory>src/main/resources</directory>
             </resource>
+
+
         </resources>
+
+
     </build>
 
 </project>

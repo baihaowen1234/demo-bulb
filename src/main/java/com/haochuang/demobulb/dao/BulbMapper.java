@@ -1,4 +1,7 @@
 package com.haochuang.demobulb.dao;
 
-public class BulbMapper {
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface BulbMapper {
 }

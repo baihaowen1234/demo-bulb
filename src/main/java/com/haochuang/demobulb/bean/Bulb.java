@@ -21,7 +21,7 @@ public class Bulb {
     private String  open;
     private String  close;
     private Integer power;
-    private Integer luminance;
+    private Float luminance;
     private String timingopen;
     private String timingclose;
 

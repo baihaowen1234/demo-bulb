@@ -1,4 +1,4 @@
 package com.haochuang.demobulb.service;
 
-public interface BulbService {
+public class ModBusService {
 }
