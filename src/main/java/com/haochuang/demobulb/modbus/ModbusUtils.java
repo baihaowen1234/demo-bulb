@@ -1,5 +1,6 @@
-package com.haochuang.demobulb.service;
+package com.haochuang.demobulb.modbus;
 
+import com.haochuang.demobulb.bean.Modbus;
 import com.serotonin.modbus4j.ModbusFactory;
 import com.serotonin.modbus4j.ModbusMaster;
 import com.serotonin.modbus4j.exception.ModbusInitException;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 
 @Service
-public class ModBusImpl {
+public class ModbusUtils {
     /**
      * 批量写数据到保持寄存器
      * @param ip 从站IP  ip
@@ -29,12 +30,12 @@ public class ModBusImpl {
     public static ModbusMaster tcpMaster = null;
 
 //    写
-    public static void modbusWTCP( String ip,int port, int slaveId,int start, short[] values) {
+    public static void modbusWTCP(Modbus modbus) {
 
-        params.setHost(ip);
+        params.setHost(modbus.getIp());
         // 设置端口，默认502
-        if (502 != port) {
-            params.setPort(port);
+        if (502 != modbus.getPort()) {
+            params.setPort(modbus.getPort());
         }
 
         // 参数1：IP和端口信息 参数2：保持连接激活
@@ -48,7 +49,7 @@ public class ModBusImpl {
         }
         try {
 
-            WriteRegistersRequest request  = new WriteRegistersRequest( slaveId, start, values );
+            WriteRegistersRequest request  = new WriteRegistersRequest( modbus.getSlaveId(), modbus.getStart(), modbus.getValues() );
             System.out.println(request);
             WriteRegistersResponse response = (WriteRegistersResponse) tcpMaster.send(request);
 
@@ -74,12 +75,12 @@ public class ModBusImpl {
      * @return
      */
     static ModbusRequest modbusRequest=null;
-    public static ByteQueue modbusTCP(String ip, int port, int slaveId,int start,int readLenth) {
-
-        params.setHost(ip);
+    public static ByteQueue modbusTCP(Modbus modbus) {
+        System.out.println(modbus);
+        params.setHost(modbus.getIp());
         //设置端口，默认502
-        if(502!=port){
-            params.setPort(port);
+        if(502!=modbus.getPort()){
+            params.setPort(modbus.getPort());
         }
         ModbusMaster tcpMaster = null;
         tcpMaster = modbusFactory.createTcpMaster(params, false);
@@ -97,7 +98,7 @@ public class ModBusImpl {
 
         try {
             //功能码03   读取保持寄存器的值
-            modbusRequest = new ReadHoldingRegistersRequest(slaveId,start, readLenth);
+            modbusRequest = new ReadHoldingRegistersRequest(modbus.getSlaveId(),modbus.getStart(), modbus.getReadLenth());
 
         } catch (ModbusTransportException e) {
             e.printStackTrace();
@@ -105,7 +106,7 @@ public class ModBusImpl {
         ModbusResponse modbusResponse=null;
         try {
 
-            ReadHoldingRegistersRequest request = new ReadHoldingRegistersRequest(slaveId, start, readLenth);
+            ReadHoldingRegistersRequest request = new ReadHoldingRegistersRequest(modbus.getSlaveId(),modbus.getStart(), modbus.getReadLenth());
             ReadHoldingRegistersResponse response = (ReadHoldingRegistersResponse) tcpMaster.send(request);
             System.out.println(Arrays.toString(response.getShortData()));
         } catch (ModbusTransportException e) {
@@ -129,11 +130,15 @@ public class ModBusImpl {
     }
 
     public static void main(String[] args) {
-        final short[] shorts = new short[1];
-
-
-
-        modbusWTCP("127.0.0.1",502,1,3,1);
+        final short[] shorts = {1, 2, 3, 4};
+        final Modbus modbus = new Modbus();
+        modbus.setIp("127.0.0.1");
+        modbus.setPort(502);
+        modbus.setSlaveId(1);
+        modbus.setStart(2);
+        modbus.setReadLenth(4);
+        modbusTCP(modbus);
+//        modbusWTCP("127.0.0.1",502,1,3,shorts);
     }
 
 }
