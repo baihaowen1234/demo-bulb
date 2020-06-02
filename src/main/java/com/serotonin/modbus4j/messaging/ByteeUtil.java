@@ -11,7 +11,7 @@ public class ByteeUtil {
 
 
 
-    public Short[] bytte(ByteQueue byteQueue){
+    public static Short[] bytte(ByteQueue byteQueue){
         String mmm = byteQueue.toString().substring(9, byteQueue.toString().length() - 1);
 
 //        System.out.println(mmm);
