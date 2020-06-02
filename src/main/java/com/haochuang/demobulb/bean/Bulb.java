@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Bulb {
+    private Integer id;
     private String  noeopen;
     private String  noeclose;
     private String  open;
