@@ -9,9 +9,9 @@ public interface BulbMapper {
   //    读取的数据存入数据库
   void sava(Bulb bulb);
   Bulb find();
-
-
   void savaup(Bulb bulb);
+  
+  Bulb getStatus(int id);
 
 
 

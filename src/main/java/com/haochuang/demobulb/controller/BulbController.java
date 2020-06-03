@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,7 +20,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 @Slf4j
-@Controller
+@RestController
 public class BulbController {
 
   @Autowired
@@ -55,6 +56,11 @@ public class BulbController {
     ModbusUtils.modbusWTCP(modbus);
 
     return "redirect:/";
+  }
+  
+  @GetMapping("/getstatus")
+  public Bulb getStatus(int id){
+    return bulbService.getStatus(id);
   }
 
 }
