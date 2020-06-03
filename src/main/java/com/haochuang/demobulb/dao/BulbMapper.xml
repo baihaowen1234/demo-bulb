@@ -7,10 +7,19 @@
     <!-- parameterType:声明输入参数的类型 -->
     <!-- resultType:声明输出结果的类型，应该填写pojo的全路径 -->
     <!-- #{}：输入参数的占位符，相当于jdbc的？ -->
+
     <resultMap id="Base" type="com.haochuang.demobulb.bean.Bulb">
         <id column="id"  property="id" jdbcType="BIGINT"/>
-        <result column="name"  property="name" jdbcType="VARCHAR"/>
+        <result column="devicename"  property="deviceName" jdbcType="VARCHAR"/>
+        <result column="isoppen"  property="isOppen" jdbcType="BIGINT"/>
+        <result column="isonline"  property="isOnline" jdbcType="BIGINT"/>
+        <result column="wattage"  property="wattage" jdbcType="Float"/>
+        <result column="timingopen"  property="timingOpen" jdbcType="VARCHAR"/>
+        <result column="particulars"  property="particulars" jdbcType="VARCHAR"/>
     </resultMap>
+
+
+
 
 
 </mapper>
