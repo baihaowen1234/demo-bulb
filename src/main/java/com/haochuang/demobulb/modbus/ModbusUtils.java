@@ -148,15 +148,7 @@ public class ModbusUtils {
         modbus.setValues(shorts);
         modbusWTCP(modbus);
 
-//        final short[] shorts1 = modbusTCP(modbus);
-//        for (short i : shorts1) {
-//            System.out.println(i);
-//        }
 
-//         Short[] bytte = ByteeUtil.bytte(byteQueue);
-//
-//
-//        System.out.println(bytte);
 
     }
 
