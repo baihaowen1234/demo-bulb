@@ -92,7 +92,7 @@
             <artifactId>com.serotonin.modbus4j</artifactId>
             <scope>system</scope>
             <version>1.0</version>
-            <systemPath>${project.basedir}/src/main/resources/lib/modbus4J.jar</systemPath>
+            <systemPath>${project.basedir}/lib/modbus4J.jar</systemPath>
         </dependency>
 
         <dependency>
@@ -100,7 +100,7 @@
             <artifactId>serotonin.serotonin</artifactId>
             <scope>system</scope>
             <version>1.0</version>
-            <systemPath>${project.basedir}/src/main/resources/lib/seroUtils.jar</systemPath>
+            <systemPath>${project.basedir}/lib/seroUtils.jar</systemPath>
         </dependency>
 
 
