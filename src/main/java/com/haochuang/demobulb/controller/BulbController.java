@@ -1,8 +1,10 @@
 package com.haochuang.demobulb.controller;
 
+import com.haochuang.demobulb.bean.Bulb;
 import com.haochuang.demobulb.bean.Modbus;
 import com.haochuang.demobulb.modbus.ModbusUtils;
 import com.haochuang.demobulb.service.BulbService;
+import com.haochuang.demobulb.utils.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -14,59 +16,46 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Arrays;
+import java.util.Date;
 
 @Slf4j
 @Controller
 public class BulbController {
 
+  @Autowired
+  private BulbService bulbService;
+
+  //监控操作  通过读和写  写入数据库
+  @GetMapping("/")
+  public String cehis(HttpSession session) {
+
+    final short[] read = bulbService.read();
+    bulbService.savaup(read);
 
 
-    //监控操作  通过读和写  写入数据库
-    @GetMapping("/")
-    public String cehis(HttpSession session) {
-        Modbus modbus = new Modbus();
-        modbus.setIp("127.0.0.1");
-        modbus.setPort(502);
-        modbus.setSlaveId(1);
-        modbus.setStart(7);
-        modbus.setReadLenth(5);
-        //读modbusTCP
-        //读板子的值
-        short[] shorts = ModbusUtils.modbusTCP(modbus);
-        // 读出来的板子值存入数据库  展示给客户端
+    session.setAttribute("shorts",read);
+    return "index";
+  }
 
-
-
-        modbus.setValues(shorts);
-        //写modbusWTCP
-        boolean wtcp = ModbusUtils.modbusWTCP(modbus);
-        //写入的modbus存入数据库
-
-
-        session.setAttribute("shorts", shorts);
-        session.setAttribute("wtcp", wtcp);
-
-        return "index";
+  //写入操作 客户端写和读都存入数据库
+  @PostMapping("/charu")
+  public String charu(Modbus modbus, HttpServletRequest request) {
+    System.out.println(modbus.getValues() + "内容");
+    if (modbus.getValues() == null) {
+      request.setAttribute("msg", "修改不能为空");
+      return "redirect:/";
     }
+    modbus.setIp("127.0.0.1");
+    modbus.setPort(502);
+    modbus.setSlaveId(1);
+    modbus.setStart(1);
+    final short[] values = modbus.getValues();
+    bulbService.savaup(values);
+    modbus.setValues(values);
+    ModbusUtils.modbusWTCP(modbus);
 
-    //写入操作 客户端写和读都存入数据库
-    @PostMapping("/charu")
-    public String charu(Modbus modbus,HttpServletRequest request) {
-        System.out.println(modbus.getValues() + "内容");
-        if (modbus.getValues() == null) {
-            request.setAttribute("msg", "修改不能为空");
-            return "redirect:/";
-        }
-        modbus.setIp("127.0.0.1");
-        modbus.setPort(502);
-        modbus.setSlaveId(1);
-        modbus.setStart(7);
-        final short[] values = modbus.getValues();
-        modbus.setValues(values);
-        ModbusUtils.modbusWTCP(modbus);
-        request.setAttribute("msg", "修改成功");
-        return "redirect:/";
-    }
+    return "redirect:/";
+  }
 
 }
 

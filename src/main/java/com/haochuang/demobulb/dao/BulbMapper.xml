@@ -7,19 +7,30 @@
     <!-- parameterType:声明输入参数的类型 -->
     <!-- resultType:声明输出结果的类型，应该填写pojo的全路径 -->
     <!-- #{}：输入参数的占位符，相当于jdbc的？ -->
-
     <resultMap id="Base" type="com.haochuang.demobulb.bean.Bulb">
-        <id column="id"  property="id" jdbcType="BIGINT"/>
-        <result column="devicename"  property="deviceName" jdbcType="VARCHAR"/>
-        <result column="isoppen"  property="isOppen" jdbcType="BIGINT"/>
-        <result column="isonline"  property="isOnline" jdbcType="BIGINT"/>
-        <result column="wattage"  property="wattage" jdbcType="Float"/>
-        <result column="timingopen"  property="timingOpen" jdbcType="VARCHAR"/>
-        <result column="particulars"  property="particulars" jdbcType="VARCHAR"/>
+        <id column="id" property="id" jdbcType="SMALLINT"/>
+        <result column="deviceName" property="deviceName" jdbcType="VARCHAR"/>
+        <result column="isOppen" property="isOppen" jdbcType="SMALLINT"/>
+        <result column="isOnline" property="isOnline" jdbcType="SMALLINT"/>
+        <result column="wattage" property="wattage" jdbcType="SMALLINT"/>
+        <result column="timingOpen" property="timingOpen" jdbcType="VARCHAR"/>
+        <result column="Particulars" property="particulars" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <insert id="sava" parameterType="com.haochuang.demobulb.bean.Bulb">
+        insert into Bulb values (#{id},#{deviceName},#{isOppen},#{isOnline},#{wattage},#{timingOpen},#{particulars})
+    </insert>
+
+    <update id="savaup" parameterType="com.haochuang.demobulb.bean.Bulb">
+        update Bulb set deviceName=#{deviceName},isOppen=#{isOppen},isOnline=#{isOnline},
+        wattage=#{wattage},timingOpen=#{timingOpen},particulars=#{particulars}
+        where id=#{id}
+
+    </update>
 
 
-
+    <select id="find" resultMap="Base">
+        select * from Bulb
+    </select>
 
 </mapper>

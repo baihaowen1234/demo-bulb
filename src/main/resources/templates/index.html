@@ -6,29 +6,36 @@
 </head>
 <body>
 <h1>测试方法</h1>
-<div th:each="indexs:${session.shorts}">
-    <p th:text="${indexs}"></p>
-</div>
+
+
+        <div>
+
+
+            <div> 设备ID:<span th:text="${session.shorts[0]}"></span></div>
+        <div>开关:<span th:text="${session.shorts[1]}"></span></div>
+        <div>在线状态:<span th:text="${session.shorts[2]}"></span></div>
+        <div>瓦数:<span th:text="${session.shorts[3]}"></span></div>
+
+
+        </div>
+
+
+
+
+
+
 
 
 <form class="xieru" method="post" action="/charu">
-    权限： <input name="values">
-    状态： <input name="values">
-    模式： <input name="values">
-    温度： <input name="values">
-    风速： <input name="values">
+    开/关： <input name="values">
+    设备在线状态： <input name="values">
+    瓦数： <input name="values">
+
     <input class="tijiao" type="submit" value="确认修改">
 </form>
 
 <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
-<!--<script>-->
-<!--    $(".tijiao").click(function () {-->
-<!--        $.post("/charu",$(".xieru").serialize(),function (data) {-->
-<!--        alert(data)-->
-<!--        })-->
-<!--    });-->
 
-<!--</script>-->
 
 </body>
 </html>

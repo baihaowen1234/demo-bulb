@@ -16,19 +16,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Bulb {
     //设备ID
-    private Integer id;
+    private Short id;
     //设备名称
     private String deviceName;
     //、开/关、
-    private Integer  isOppen;
+    private Short  isOppen;
     //设备在线状态
-    private Integer isOnline;
+    private Short isOnline;
     //瓦数
-    private Float  wattage ;
+    private Short  wattage ;
     //设备开启时间
     private String timingOpen;
     //设备详情
-    private String particulars;
+    private String Particulars;
+
 
 
 }
