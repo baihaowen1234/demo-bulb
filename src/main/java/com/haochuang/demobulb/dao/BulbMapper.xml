@@ -10,7 +10,12 @@
 
     <resultMap id="Base" type="com.haochuang.demobulb.bean.Bulb">
         <id column="id"  property="id" jdbcType="BIGINT"/>
-        <result column="name"  property="name" jdbcType="VARCHAR"/>
+        <result column="devicename"  property="deviceName" jdbcType="VARCHAR"/>
+        <result column="isoppen"  property="isOppen" jdbcType="BIGINT"/>
+        <result column="isonline"  property="isOnline" jdbcType="BIGINT"/>
+        <result column="wattage"  property="wattage" jdbcType="Float"/>
+        <result column="timingopen"  property="timingOpen" jdbcType="VARCHAR"/>
+        <result column="particulars"  property="particulars" jdbcType="VARCHAR"/>
     </resultMap>
 
 
