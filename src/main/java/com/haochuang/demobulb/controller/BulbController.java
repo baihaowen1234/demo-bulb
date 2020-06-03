@@ -32,29 +32,27 @@ public class BulbController {
     final short[] read = bulbService.read();
     bulbService.savaup(read);
 
-
     session.setAttribute("shorts",read);
     return "index";
   }
 
   //写入操作 客户端写和读都存入数据库
   @PostMapping("/charu")
-  public String charu(Modbus modbus, HttpServletRequest request) {
-    System.out.println(modbus.getValues() + "内容");
-    if (modbus.getValues() == null) {
-      request.setAttribute("msg", "修改不能为空");
-      return "redirect:/";
-    }
+  public String charu(Modbus modbus) {
     modbus.setIp("127.0.0.1");
     modbus.setPort(502);
     modbus.setSlaveId(1);
     modbus.setStart(1);
     final short[] values = modbus.getValues();
-    bulbService.savaup(values);
     modbus.setValues(values);
     ModbusUtils.modbusWTCP(modbus);
 
-    return "redirect:/";
+     bulbService.savaup(values);
+
+
+
+
+    return "index";
   }
 
 }
