@@ -7,4 +7,5 @@ public interface BulbService {
     void sava(Bulb bulb);
     void savaup(short[] shorts);
     short[] read();
+    Bulb getStatus(int id);
 }

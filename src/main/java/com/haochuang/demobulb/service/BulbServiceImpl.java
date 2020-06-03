@@ -59,4 +59,9 @@ public class BulbServiceImpl implements BulbService {
     final short[] shorts1 = ModbusUtils.modbusTCP(modbus);
     return  shorts1;
   }
+  
+  @Override
+  public Bulb getStatus(int id) {
+    return bulbMapper.getStatus(id);
+  }
 }
